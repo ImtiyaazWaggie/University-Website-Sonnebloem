@@ -122,34 +122,34 @@ def create_news_form():
         error = None
         
         if not headline:
-            errors = 'Headline is required.'
+            error = 'Headline is required.'
 
         elif not sub_headline:
-            errors = 'Last Name is required.'
+            error = 'Last Name is required.'
 
         elif not author:
-            errors = 'ID Number is required.'
+            error = 'ID Number is required.'
 
         elif not introduction:
-            errors = 'Date of Birth is required.'
+            error = 'Date of Birth is required.'
 
         elif not paragraph_one:
-            errors = 'Phone Number is required.'
+            error = 'Phone Number is required.'
         elif not paragraph_two:
-            errors = 'Phone Number is required.'
+            error = 'Phone Number is required.'
         elif not paragraph_three:
-            errors = 'Phone Number is required.'
+            error = 'Phone Number is required.'
         elif not paragraph_four:
-            errors = 'Phone Number is required.'
+            error = 'Phone Number is required.'
 
         elif not quotes:
-            errors = 'Email Address is required.'
+            error = 'Email Address is required.'
 
         elif not tags:
-            errors = 'Address / Street is required.'
+            error = 'Address / Street is required.'
             
         elif not file:
-            errors = 'File upload is required.'
+            error = 'File upload is required.'
         
         filename = None
         
@@ -214,3 +214,148 @@ def news_post_details(post_id):
         abort(404, f"News post id {post_id} doesn't exist.")
 
     return render_template('university/news_post.html', post=post)
+
+
+
+
+#-------------------Application form-----------------------------------------------------
+
+
+@bp.route('/application_form', methods=('GET', 'POST'))
+def create_application_form():
+    if request.method == 'POST':
+        full_name = request.form['full_name']
+        last_name = request.form['last_name']
+        id_number = request.form['id_number']
+        dob = request.form['dob']
+        phone_number = request.form['phone_number']
+        email = request.form['email']
+        home_address = request.form['home_address']
+        city = request.form['city']
+        country = request.form['country']
+        home_state = request.form['home_state']
+        zipcode = request.form['zipcode']
+
+        subject_one = request.form['subject_one']
+        grade_one = request.form['grade_one']
+        subject_two = request.form['subject_two']
+        grade_two = request.form['grade_two']
+        subject_three = request.form['subject_three']
+        grade_three = request.form['grade_three']
+        subject_four = request.form['subject_four']
+        grade_four = request.form['grade_four']
+        subject_five = request.form['subject_five']
+        grade_five = request.form['grade_five']
+        subject_six = request.form['subject_six']
+        grade_six = request.form['grade_six']
+        subject_seven = request.form['subject_seven']
+        grade_seven = request.form['grade_seven']
+
+        first_choice = request.form['first_choice']
+        second_choice = request.form['second_choice']
+
+        # Handle file upload separately
+        file = request.files.get('file')
+        
+        error = None
+        
+        
+        if not full_name:
+            error = 'Full Name is required.'
+
+        elif not last_name:
+            error = 'Last Name is required.'
+
+        elif not id_number:
+            error = 'ID Number is required.'
+
+        elif not dob:
+            error = 'Date of Birth is required.'
+
+        elif not phone_number:
+            error = 'Phone Number is required.'
+
+        elif not email:
+            error = 'Email Address is required.'
+
+        elif not home_address:
+            error = 'Address / Street is required.'
+
+        elif not city:
+            error = 'City is required.'
+
+        elif not country:
+            error = 'Country / Region is required.'
+
+        elif not home_state:
+            error = 'State / Province is required.'
+
+        elif not zipcode:
+            error = 'Zipcode is required.'
+
+        # Academic Details (assuming at least one subject and grade is required)
+        elif not subject_one or not grade_one:
+            error = 'First subject and grade are required.'
+
+        elif not subject_two or not grade_two:
+            error = 'Second subject and grade are required.'
+            
+        elif not subject_three or not grade_three:
+            error = 'Subject Three and its grade are required.'
+
+        elif not subject_four or not grade_four:
+            error = 'Subject Four and its grade are required.'
+
+        elif not subject_five or not grade_five:
+            error = 'Subject Five and its grade are required.'
+
+        elif not subject_six or not grade_six:
+            error = 'Subject Six and its grade are required.'
+
+        elif not subject_seven or not grade_seven:
+            error = 'Subject Seven and its grade are required.'
+
+        # You can add similar checks for additional subjects if needed
+
+        elif not first_choice:
+            error = 'First Choice Programme is required.'
+
+        elif not second_choice:
+            error = 'Second Choice Programme is required.'
+
+        # File validation (optional)
+        elif not file:
+            error = 'File upload is required.'
+
+
+        filename = None
+        
+        if file and file.filename:
+            # Ensure the uploads directory exists
+            uploads_dir = os.path.join(current_app.root_path, 'static', 'uploads')
+            if not os.path.exists(uploads_dir):
+                os.makedirs(uploads_dir)
+            
+            # Secure the filename and save the file
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(uploads_dir, filename)
+            file.save(file_path)
+        
+            
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'INSERT INTO applications (full_name, last_name, id_number, dob, phone_number, email, home_address, city, country, home_state, zipcode, '
+                'subject_one, grade_one, subject_two, grade_two, subject_three, grade_three, subject_four, grade_four, subject_five, grade_five, '
+                'subject_six, grade_six, subject_seven, grade_seven, first_choice, second_choice, file) '
+                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (full_name, last_name, id_number, dob, phone_number, email, home_address, city, country, home_state, zipcode, 
+                subject_one, grade_one, subject_two, grade_two, subject_three, grade_three, subject_four, grade_four, subject_five, grade_five,
+                subject_six, grade_six, subject_seven, grade_seven, first_choice, second_choice, filename)
+            )
+            db.commit()
+            return redirect(url_for('university.index'))
+    
+    return render_template('university/application_form.html')
