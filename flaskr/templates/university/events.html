@@ -4,8 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='src/base.css') }}">
-        <title>{% block title %}{% endblock %}</title>
+        <title>Events</title>
     </head>
     <body>
         <nav class="bg-white shadow-lg h-24 flex items-center justify-center px-4 lg:px-6 xl:px-8" role="navigation" aria-label="Main Navigation">
@@ -63,17 +62,41 @@
             </div>
         </nav>
 
-        <section class="content">
-            <header>
-              {% block header %}{% endblock %}
-            </header>
-
-            {% for message in get_flashed_messages() %}
-              <div class="flash">{{ message }}</div>
-            {% endfor %}
-          
-            {% block programmes %}
-            {% endblock %}
-          </section>
+            
+        <section class="bg-white dark:bg-gray-900">
+            <div class="container px-6 py-10 mx-auto">
+                <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white flex-1"></h1>
+                {% for event in events_posts %}
+                <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
+                    <article class="flex bg-white transition hover:shadow-xl">
+                        <div class="rotate-180 p-2 [writing-mode:_vertical-lr]">
+                          <time datetime="{{event.event_date}}" class="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900">
+                                <span>{{event.event_date}}</span>
+                                <span class="w-px flex-1 bg-gray-900/10"></span>
+                                <span>{{event.start_time}}</span>
+                          </time>
+                        </div>
+                      
+                        <div class="hidden sm:block sm:basis-56">
+                          <img alt="" src="{{ url_for('static', filename='uploads/' + event.file) }}" class="aspect-square h-full w-full object-cover"/>
+                        </div>
+                      
+                        <div class="flex flex-1 flex-col justify-between">
+                          <div class="border-s border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+                            <a href="#">
+                              <h3 class="font-bold uppercase text-gray-900">{{event.event_name}}</h3>
+                            </a>
+                            <p class="mt-2 line-clamp-3 text-sm/relaxed text-gray-700">{{event.event_description}}</p>
+                          </div>
+                      
+                          <div class="sm:flex sm:items-end sm:justify-end">
+                            <a href="#" class="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400"> Read Full Details </a>
+                          </div>
+                        </div>
+                      </article>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
     </body>
 </html>
