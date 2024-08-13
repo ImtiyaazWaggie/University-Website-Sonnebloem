@@ -1,6 +1,5 @@
-DROP TABLE IF EXISTS user;
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY  AUTOINCREMENT,                   -- Unique identifier for each user
     username VARCHAR(255)  UNIQUE NOT NULL,                 -- Unique username for the user
     first_name VARCHAR(255) NOT NULL,                       -- First name of the user
@@ -9,4 +8,17 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,                     -- Email address of the user
     password TEXT NOT NULL,                                 -- Hashed password for security
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP          -- Timestamp of when the record was created
+);
+
+CREATE TABLE IF NOT EXISTS programmes (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    programme_name VARCHAR(255) NOT NULL,
+    programme_code VARCHAR(50) NOT NULL UNIQUE,
+    programme_length VARCHAR(50),
+    programme_stream VARCHAR(100),
+    programme_description TEXT,
+    qualification_type VARCHAR(50) CHECK (qualification_type IN ('Certificate', 'Degree', 'Diploma')),
+    graduate_type VARCHAR(50) CHECK (graduate_type IN ('Undergraduate', 'Postgraduate')),
+    study_type VARCHAR(50) CHECK (study_type IN ('Full-Time', 'Part-Time')),
+    programme_faculty VARCHAR(100) CHECK (programme_faculty IN ('Commerce', 'Engineering', 'Health', 'Humanities', 'Law', 'Science'))
 );

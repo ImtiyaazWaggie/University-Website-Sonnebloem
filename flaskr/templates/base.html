@@ -4,8 +4,76 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='src/base.css') }}">
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body>
+        <nav class="bg-white shadow-lg h-24 flex items-center justify-center px-4 lg:px-6 xl:px-8" role="navigation" aria-label="Main Navigation">
+            <!-- Logo Section -->
+            <a href="{{ url_for('university.index') }}" class="flex-shrink-0">
+                <img src="https://i.ibb.co/W6ZXdqN/2021-10-26-16h20-21.png" alt="Company Logo" class="h-12 w-auto">
+            </a>
+        
+            <!-- Navigation Links -->
+            <div class="flex flex-grow items-center justify-center">
+                <nav class="font-semibold text-base lg:text-lg">
+                    <ul class="flex items-center space-x-4 xl:space-x-6">
+                        <li class="p-3 xl:p-6">
+                            <a href="{{ url_for('university.index') }}" aria-current="page">
+                                <span>Home</span>
+                            </a>
+                        </li>
+                        <li class="p-3 xl:p-6">
+                            <a href="#">
+                                <span>About</span>
+                            </a>
+                        </li>
+                        <li class="p-3 xl:p-6">
+                            <a href="{{ url_for('university.programmes') }}">
+                                <span>Programs</span>
+                            </a>
+                        </li>
+                        <li class="p-3 xl:p-6">
+                            <a href="#">
+                                <span>News</span>
+                            </a>
+                        </li>
+                        <li class="p-3 xl:p-6">
+                            <a href="#">
+                                <span>Events</span>
+                            </a>
+                        </li>
+                        <li class="p-3 xl:p-6">
+                            <a href="#">
+                                <span>Application</span>
+                            </a>
+                        </li>
+                        <li class="p-3 xl:p-6">
+                            <a href="#">
+                                <span>Bursaries</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        
+            <!-- Button Section -->
+            <div class="flex-shrink-0">
+                <button class="bg-black hover:bg-gray-700 text-white font-bold px-4 xl:px-6 py-2 xl:py-3 rounded">Contact Us</button>
+            </div>
+        </nav>
+
+        <section class="content">
+            <header>
+              {% block header %}{% endblock %}
+            </header>
+
+            {% for message in get_flashed_messages() %}
+              <div class="flash">{{ message }}</div>
+            {% endfor %}
+          
+            {% block programmes %}
+            {% endblock %}
+          </section>
     </body>
 </html>
