@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
+    <title>Application Form</title>
+</head>
+    <body>
+        <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+            <form method="post" enctype="multipart/form-data" class="container max-w-screen-lg mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="font-semibold text-xl text-gray-600">Application Form</h2>
+                    <a href="/" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">
+                        Home
+                    </a>
+                </div>
+        
+                <!-- Personal Details Section -->
+                <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                        <div class="text-gray-600">
+                            <p class="font-medium text-lg">Personal Details</p>
+                            <p>Please fill out all the fields.</p>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                <div class="md:col-span-5">
+                                    <label for="full_name">Full Name</label>
+                                    <input type="text" name="full_name" id="full_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['full_name'] }}" />
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="last_name">Last Name</label>
+                                    <input type="text" name="last_name" id="last_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['last_name'] }}" />
+                                </div>
+                                <div class="md:col-span-3">
+                                    <label for="id_number">ID Number</label>
+                                    <input type="text" name="id_number" id="id_number" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['id_number'] }}" />
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="dob">Date of Birth</label>
+                                    <input type="date" name="dob" id="dob" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['dob'] }}" />
+                                </div>
+                                <div class="md:col-span-4">
+                                    <label for="phone_number">Phone Number</label>
+                                    <input type="text" name="phone_number" id="phone_number" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['phone_number'] }}" />
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="email">Email Address</label>
+                                    <input type="email" name="email" id="email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['email'] }}" placeholder="email@domain.com" />
+                                </div>
+                                <div class="md:col-span-3">
+                                    <label for="home_address">Address / Street</label>
+                                    <input type="text" name="home_address" id="home_address" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['home_address'] }}" />
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="city">City</label>
+                                    <input type="text" name="city" id="city" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['city'] }}" />
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="country">Country / Region</label>
+                                    <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                        <input name="country" id="country" placeholder="Country" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" value="{{ request.form['country'] }}" />
+                                        <button tabindex="-1" class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
+                                            <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                        </button>
+                                        <button tabindex="-1" for="show_more" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                            <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="home_state">State / Province</label>
+                                    <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                                        <input name="home_state" id="home_state" placeholder="home_state" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" value="{{ request.form['home_state'] }}" />
+                                        <button tabindex="-1" class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
+                                            <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                        </button>
+                                        <button tabindex="-1" for="show_more" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
+                                            <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="md:col-span-1">
+                                    <label for="zipcode">Zipcode</label>
+                                    <input type="text" name="zipcode" id="zipcode" class="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['zipcode'] }}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Academic Details Section -->
+                <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                        <div class="text-gray-600">
+                            <p class="font-medium text-lg">Academic Details</p>
+                            <p>Please fill out all the fields.</p>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                <div class="md:col-span-4">
+                                    <label for="subject_one">Subject Name</label>
+                                    <input type="text" name="subject_one" id="subject_one" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['subject_one'] }}" />
+                                </div>
+                                <div class="md:col-span-1">
+                                    <label for="grade_one">Subject Grade (%)</label>
+                                    <input type="text" name="grade_one" id="grade_one" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['grade_one'] }}" />
+                                </div>
+                                <div class="md:col-span-4">
+                                    <label for="subject_two">Subject Name</label>
+                                    <input type="text" name="subject_two" id="subject_two" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['subject_two'] }}" />
+                                </div>
+                                <div class="md:col-span-1">
+                                    <label for="grade_two">Subject Grade (%)</label>
+                                    <input type="text" name="grade_two" id="grade_two" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['grade_two'] }}" />
+                                </div>
+                                <div class="md:col-span-4">
+                                    <label for="subject_three">Subject Name</label>
+                                    <input type="text" name="subject_three" id="subject_three" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['subject_three'] }}" />
+                                </div>
+                                <div class="md:col-span-1">
+                                    <label for="grade_three">Subject Grade (%)</label>
+                                    <input type="text" name="grade_three" id="grade_three" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['grade_three'] }}" />
+                                </div>
+                                <div class="md:col-span-4">
+                                    <label for="subject_four">Subject Name</label>
+                                    <input type="text" name="subject_four" id="subject_four" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['subject_four'] }}" />
+                                </div>
+                                <div class="md:col-span-1">
+                                    <label for="grade_four">Subject Grade (%)</label>
+                                    <input type="text" name="grade_four" id="grade_four" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['grade_four'] }}" />
+                                </div>
+                                <div class="md:col-span-4">
+                                    <label for="subject_five">Subject Name</label>
+                                    <input type="text" name="subject_five" id="subject_five" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['subject_five'] }}" />
+                                </div>
+                                <div class="md:col-span-1">
+                                    <label for="grade_five">Subject Grade (%)</label>
+                                    <input type="text" name="grade_five" id="grade_five" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['grade_five'] }}" />
+                                </div>
+                                <div class="md:col-span-4">
+                                    <label for="subject_six">Subject Name</label>
+                                    <input type="text" name="subject_six" id="subject_six" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['subject_six'] }}" />
+                                </div>
+                                <div class="md:col-span-1">
+                                    <label for="grade_six">Subject Grade (%)</label>
+                                    <input type="text" name="grade_six" id="grade_six" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['grade_six'] }}" />
+                                </div>
+                                <div class="md:col-span-4">
+                                    <label for="subject_seven">Subject Name</label>
+                                    <input type="text" name="subject_seven" id="subject_seven" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['subject_seven'] }}" />
+                                </div>
+                                <div class="md:col-span-1">
+                                    <label for="grade_seven">Subject Grade (%)</label>
+                                    <input type="text" name="grade_seven" id="grade_seven" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['grade_seven'] }}" />
+                                </div>
+                                <!-- Additional subjects and grades as needed -->
+                                <div class="md:col-span-4">
+                                    <label class="mb-5 block text-xl">Upload PDF version of current grades</label>
+                                    <div class="mb-8">
+                                        <input type="file" name="file" id="file" accept=".pdf" class="sr-only" />
+                                        <label for="file" id="fileLabel" class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer">
+                                            <div id="uploadContent">
+                                                <span class="mb-2 block text-xl font-semibold text-[#07074D]" id="filePrompt">Drop files here</span>
+                                                <span class="mb-2 block text-base font-medium text-[#6B7280]">Or</span>
+                                                <span class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]">Browse</span>
+                                            </div>
+                                            <div id="fileInfo" class="hidden">
+                                                <span id="fileName" class="block text-base font-medium text-[#07074D]"></span>
+                                                <span class="block text-sm text-green-600">File uploaded successfully</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Programmes Details Section -->
+                <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                        <div class="text-gray-600">
+                            <p class="font-medium text-lg">Programmes Details</p>
+                            <p>Please fill out all the fields.</p>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                <div class="md:col-span-5">
+                                    <label for="first_choice">First Choice</label>
+                                    <select name="first_choice" id="first_choice"  value="{{ request.form['first_choice'] }}" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                                        <option value="">Select Programme</option>
+                                        <option value="academic">Academic</option>
+                                        <option value="social" >Social</option>
+                                        <option value="cultural">Cultural</option>
+                                        <option value="sports" >Sports</option>
+                                        <option value="other" >Other</option>
+                                    </select>
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="second_choice">Second Choice</label>
+                                    <select name="second_choice" id="second_choice" value="{{ request.form['second_choice'] }}" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                                        <option value="">Select Programme</option>
+                                        <option value="academic" >Academic</option>
+                                        <option value="social" >Social</option>
+                                        <option value="cultural" >Cultural</option>
+                                        <option value="sports" >Sports</option>
+                                        <option value="other" >Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Submit Button -->
+                <div class="text-right">
+                    <button type="submit" value="Submit Application" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('file');
+            const fileLabel = document.getElementById('fileLabel');
+            const filePrompt = document.getElementById('filePrompt');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const uploadContent = document.getElementById('uploadContent');
+        
+            fileInput.addEventListener('change', function() {
+                const file = fileInput.files[0];
+                if (file) {
+                    filePrompt.style.display = 'none'; // Hide prompt
+                    uploadContent.style.display = 'none'; // Hide the upload container
+                    fileInfo.classList.remove('hidden'); // Show file info
+                    fileName.textContent = file.name; // Set the file name
+                }
+            });
+        });
+        </script>
+</html>
