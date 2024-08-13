@@ -1,97 +1,87 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
-    <title>Application Form</title>
-</head>
-    <body>
-        <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
-            <form method="post" enctype="multipart/form-data" class="container max-w-screen-lg mx-auto">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="font-semibold text-xl text-gray-600">Programmes Form</h2>
-                    <a href="#" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">
-                        Home
-                    </a>
+{% extends 'base_dashboard.html' %}
+
+
+
+{% block programmes %}
+<div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+    <form method="post" enctype="multipart/form-data" class="container max-w-screen-lg mx-auto">
+
+        <!-- Personal Details Section -->
+        <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                <div class="text-gray-600">
+                    <p class="font-medium text-lg">Programme Details</p>
+                    <p>Please fill out all the fields.</p>
                 </div>
-        
-                <!-- Personal Details Section -->
-                <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-                        <div class="text-gray-600">
-                            <p class="font-medium text-lg">Programme Details</p>
-                            <p>Please fill out all the fields.</p>
+                <div class="lg:col-span-2">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                        <div class="md:col-span-5">
+                            <label for="programme_name">Programme Name</label>
+                            <input type="text" name="programme_name" id="programme_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_name'] }}" required/>
                         </div>
-                        <div class="lg:col-span-2">
-                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
-                                <div class="md:col-span-5">
-                                    <label for="programme_name">Programme Name</label>
-                                    <input type="text" name="programme_name" id="programme_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_name'] }}" required/>
-                                </div>
-                                <div class="md:col-span-5">
-                                    <label for="programme_code">Programme Code</label>
-                                    <input type="text" name="programme_code" id="programme_code" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_code'] }}" required/>
-                                </div>
-                                <div class="md:col-span-5">
-                                    <label for="programme_length">Programme Length</label>
-                                    <input type="text" name="programme_length" id="programme_length" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_length'] }}" required/>
-                                </div>
-                                <div class="md:col-span-5">
-                                    <label for="programme_stream">Programme Stream</label>
-                                    <input type="text" name="programme_stream" id="programme_stream" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_stream'] }}" required/>
-                                </div>
-                                <div class="md:col-span-5">
-                                    <label for="programme_description">Programme Description</label>
-                                    <textarea type="time" name="programme_description" id="programme_description" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['programme_description'] }}</textarea>
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label for="qualification_type">Qualification Type</label>
-                                    <select  name="qualification_type" id="qualification_type" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['qualification_type'] }}" required>
-                                        <option value="">select qualification type</option>
-                                        <option value="Certificate">Certificate</option>
-                                        <option value="Degree">Degree</option>
-                                        <option value="Diploma">Diploma</option>
-                                    </select>
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label for="graduate_type">Graduate Type</label>
-                                    <select name="graduate_type" id="graduate_type" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['graduate_type'] }}" required>
-                                        <option value="">select graduate type</option>
-                                        <option value="Undergraduate">Undergraduate</option>
-                                        <option value="Postgraduate">Postgraduate</option>
-                                    </select>
-                                </div>
-                                <div class="md:col-span-2">
-                                    <label for="study_type">Study Type</label>
-                                    <select name="study_type" id="study_type" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['study_type'] }}" required>
-                                        <option value="">select study type</option>
-                                        <option value="Full-Time">Full-Time</option>
-                                        <option value="Part-Time">Part-Time</option>
-                                    </select>
-                                </div> 
-                                <div class="md:col-span-3">
-                                    <label for="programme_faculty">Faculty</label>
-                                    <select name="programme_faculty" id="programme_faculty" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_faculty'] }}" required>
-                                        <option value="">select faculty</option>
-                                        <option value="Commerce">Commerce</option>
-                                        <option value="Engineering">Engineering & the Built Environment</option>
-                                        <option value="Health">Health Sciences</option>
-                                        <option value="Humanities ">Humanities </option>
-                                        <option value="Law">Law</option>
-                                        <option value="Science">Science</option>
-                                    </select>
-                                </div> 
-                            </div>
+                        <div class="md:col-span-5">
+                            <label for="programme_code">Programme Code</label>
+                            <input type="text" name="programme_code" id="programme_code" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_code'] }}" required/>
                         </div>
+                        <div class="md:col-span-5">
+                            <label for="programme_length">Programme Length</label>
+                            <input type="text" name="programme_length" id="programme_length" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_length'] }}" required/>
+                        </div>
+                        <div class="md:col-span-5">
+                            <label for="programme_stream">Programme Stream</label>
+                            <input type="text" name="programme_stream" id="programme_stream" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_stream'] }}" required/>
+                        </div>
+                        <div class="md:col-span-5">
+                            <label for="programme_description">Programme Description</label>
+                            <textarea type="time" name="programme_description" id="programme_description" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['programme_description'] }}</textarea>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="qualification_type">Qualification Type</label>
+                            <select  name="qualification_type" id="qualification_type" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['qualification_type'] }}" required>
+                                <option value="">select qualification type</option>
+                                <option value="Certificate">Certificate</option>
+                                <option value="Degree">Degree</option>
+                                <option value="Diploma">Diploma</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="graduate_type">Graduate Type</label>
+                            <select name="graduate_type" id="graduate_type" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['graduate_type'] }}" required>
+                                <option value="">select graduate type</option>
+                                <option value="Undergraduate">Undergraduate</option>
+                                <option value="Postgraduate">Postgraduate</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="study_type">Study Type</label>
+                            <select name="study_type" id="study_type" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['study_type'] }}" required>
+                                <option value="">select study type</option>
+                                <option value="Full-Time">Full-Time</option>
+                                <option value="Part-Time">Part-Time</option>
+                            </select>
+                        </div> 
+                        <div class="md:col-span-3">
+                            <label for="programme_faculty">Faculty</label>
+                            <select name="programme_faculty" id="programme_faculty" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['programme_faculty'] }}" required>
+                                <option value="">select faculty</option>
+                                <option value="Commerce">Commerce</option>
+                                <option value="Engineering">Engineering & the Built Environment</option>
+                                <option value="Health">Health Sciences</option>
+                                <option value="Humanities ">Humanities </option>
+                                <option value="Law">Law</option>
+                                <option value="Science">Science</option>
+                            </select>
+                        </div> 
                     </div>
                 </div>
-                <!-- Submit Button -->
-                <div class="text-right">
-                    <button type="submit" value="Submit Programme" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="Programmes Form">Submit</button>
-                </div>
-            </form>
+            </div>
         </div>
-    </body>   
-</html>
+        <!-- Submit Button -->
+        <div class="text-right">
+            <button type="submit" value="Submit Programme" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" value="Programmes Form">Submit</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

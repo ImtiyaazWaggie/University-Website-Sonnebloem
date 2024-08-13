@@ -26,6 +26,7 @@ def admin_dashoard():
 #-------------------Programmes form & Programmes Page-----------------------------------------------------
 
 @bp.route('/create/programmes_form', methods=('GET', 'POST'))
+
 def programmes_form():
         if request.method == 'POST':
             # Retrieve form data
@@ -72,7 +73,7 @@ def programmes_form():
                     (programme_name, programme_code, programme_length, programme_stream, programme_description, qualification_type, graduate_type, study_type, programme_faculty)
                 )
                 db.commit()
-                return redirect(url_for('university.programmes'))
+                return redirect(url_for('university.programmes_form'))
         return render_template('university/dashboard/programmes_form.html')
 
 @bp.route('/programmes')
@@ -105,6 +106,7 @@ def programmes():
 
 
 @bp.route('/create/news_form', methods=('GET', 'POST'))
+@login_required
 def create_news_form():
     if request.method == 'POST':
         headline = request.form['headline']
