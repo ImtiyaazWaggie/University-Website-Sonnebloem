@@ -38,3 +38,41 @@ CREATE TABLE IF NOT EXISTS news_posts (
     file BLOB,                              -- URL or path to the uploaded file (thumbnail)
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp of when the post was created
 );
+
+CREATE TABLE IF NOT EXISTS applications (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    full_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    id_number TEXT NOT NULL,
+    dob DATE NOT NULL,
+    phone_number TEXT NOT NULL,
+    email TEXT NOT NULL,
+    home_address TEXT NOT NULL,
+    city TEXT NOT NULL,
+    country TEXT NOT NULL,
+    home_state TEXT NOT NULL,
+    zipcode TEXT NOT NULL,
+
+    -- Academic details
+    subject_one TEXT,
+    grade_one REAL,
+    subject_two TEXT,
+    grade_two REAL,
+    subject_three TEXT,
+    grade_three REAL,
+    subject_four TEXT,
+    grade_four REAL,
+    subject_five TEXT,
+    grade_five REAL,
+    subject_six TEXT,
+    grade_six REAL,
+    subject_seven TEXT,
+    grade_seven REAL,
+
+    -- Programmes details
+    first_choice TEXT NOT NULL,
+    second_choice TEXT NOT NULL,
+
+    -- Additional fields for file upload or other data
+    file BLOB
+);
