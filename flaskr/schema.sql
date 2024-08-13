@@ -22,3 +22,19 @@ CREATE TABLE IF NOT EXISTS programmes (
     study_type VARCHAR(50) CHECK (study_type IN ('Full-Time', 'Part-Time')),
     programme_faculty VARCHAR(100) CHECK (programme_faculty IN ('Commerce', 'Engineering', 'Health', 'Humanities', 'Law', 'Science'))
 );
+
+CREATE TABLE IF NOT EXISTS news_posts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,        -- Unique ID for each news post
+    headline VARCHAR(255) NOT NULL,          -- Headline of the news post
+    sub_headline VARCHAR(255),               -- Optional subheadline
+    author VARCHAR(255),                     -- Author of the news post
+    introduction TEXT NOT NULL,             -- Introduction/Lead
+    paragraph_one TEXT NOT NULL,
+    paragraph_two TEXT NOT NULL, 
+    paragraph_three TEXT NOT NULL, 
+    paragraph_four TEXT NOT NULL,                -- Main body of the news post
+    quotes TEXT,                            -- Optional quotes
+    tags VARCHAR(255),                      -- Tags for the news post
+    file BLOB,                              -- URL or path to the uploaded file (thumbnail)
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Timestamp of when the post was created
+);
