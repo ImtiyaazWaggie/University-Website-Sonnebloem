@@ -359,3 +359,69 @@ def create_application_form():
             return redirect(url_for('university.index'))
     
     return render_template('university/application_form.html')
+
+
+
+
+@bp.route('/events')
+def events():
+    db = get_db()
+    
+    # Fetch distinct tags for the filter buttons
+        # Fetch all posts if no tag is selected
+    events_posts = db.execute(
+        'SELECT event_id, event_name, event_date, start_time, end_time, event_location, event_description, max_attendees, event_type, organizer_name, organizer_email, organizer_phone, file FROM events'
+    ).fetchall()
+    
+    return render_template('university/events.html', events_posts=events_posts)
+
+
+@bp.route('/create/event_form',methods=('GET', 'POST'))
+def event_form():
+    
+    if request.method == 'POST':
+        event_name = request.form['event_name']
+        event_date = request.form['event_date']
+        start_time = request.form['start_time']
+        end_time = request.form['end_time']
+        event_location = request.form['event_location']
+        event_description = request.form['event_description']
+        max_attendees = request.form['max_attendees']
+        event_type = request.form['event_type']
+        organizer_name = request.form['organizer_name']
+        organizer_email = request.form['organizer_email']
+        organizer_number = request.form['organizer_number']
+
+
+        # Handle file upload separately
+        file = request.files.get('file')
+        
+        error = None
+
+        filename = None
+        
+        if file and file.filename:
+            # Ensure the uploads directory exists
+            uploads_dir = os.path.join(current_app.root_path, 'static', 'uploads')
+            if not os.path.exists(uploads_dir):
+                os.makedirs(uploads_dir)
+            
+            # Secure the filename and save the file
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(uploads_dir, filename)
+            file.save(file_path)
+        
+            
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'INSERT INTO events (event_name, event_date, start_time, end_time, event_location, event_description, max_attendees, event_type, organizer_name, organizer_email, organizer_phone, file) '
+                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (event_name, event_date, start_time, end_time, event_location, event_description, max_attendees, event_type, organizer_name, organizer_email, organizer_number, filename)
+            )
+            db.commit()
+            return redirect(url_for('university.events'))
+        
+    return render_template('university/dashboard/events_form.html')

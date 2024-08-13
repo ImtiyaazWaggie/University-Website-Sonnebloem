@@ -1,0 +1,150 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
+    <title>Application Form</title>
+</head>
+    <body>
+        <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+            <form method="post" enctype="multipart/form-data" class="container max-w-screen-lg mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="font-semibold text-xl text-gray-600">Application Form</h2>
+                    <a href="/" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">
+                        Home
+                    </a>
+                </div>
+        
+                <!-- Personal Details Section -->
+                <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                        <div class="text-gray-600">
+                            <p class="font-medium text-lg">Event Details</p>
+                            <p>Please fill out all the fields.</p>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                <div class="md:col-span-5">
+                                    <label for="event_name">Event Name</label>
+                                    <input type="text" name="event_name" id="event_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['event_name'] }}" />
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="event_date">Event Date</label>
+                                    <input type="date" name="event_date" id="event_date" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['event_date'] }}" />
+                                </div>
+                                <div class="md:col-span-3">
+                                    <label for="start_time">Start Time</label>
+                                    <input type="time" name="start_time" id="start_time" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['start_time'] }}" />
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="end_time">End Time</label>
+                                    <input type="time" name="end_time" id="end_time" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['end_time'] }}" />
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="event_location">Event Location</label>
+                                    <input type="text" name="event_location" id="event_location" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['event_location'] }}" />
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="event_description">Event Description</label>
+                                    <textarea name="event_description" id="event_description" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['event_description'] }}</textarea>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label for="max_attendees">Maximum Attendees</label>
+                                    <input type="number" name="max_attendees" id="max_attendees" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['max_attendees'] }}" min="1" />
+                                </div>   
+                                <div class="md:col-span-3">
+                                    <label for="event_type">Event Type</label>
+                                    <select id="event_type" name="event_type"  value="{{ request.form['event_type'] }}" required class="h-10 border mt-1 rounded px-4 w-full bg-gray-50">
+                                        <option value="">select event type</option>
+                                        <option value="academic">Academic</option>
+                                        <option value="social">Social</option>
+                                        <option value="cultural">Cultural</option>
+                                        <option value="sports">Sports</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Academic Details Section -->
+                <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                        <div class="text-gray-600">
+                            <p class="font-medium text-lg">Organizer Details</p>
+                            <p>Please fill out all the fields.</p>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+
+                                <div class="md:col-span-4">
+                                    <label for="organizer_name">Organizer Name</label>
+                                    <input type="text" name="organizer_name" id="organizer_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['organizer_name'] }}" />
+                                </div> 
+                                <div class="md:col-span-4">
+                                    <label for="organizer_email">Organizer Email</label>
+                                    <input type="email" name="organizer_email" id="organizer_email" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['organizer_email'] }}" />
+                                </div>
+                                <div class="md:col-span-4">
+                                    <label for="organizer_number">Organizer Phone Number</label>
+                                    <input type="tel" name="organizer_number" id="organizer_number" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['organizer_number'] }}" />
+                                </div>
+     
+                                <!-- Additional subjects and grades as needed -->
+                                <div class="md:col-span-4">
+                                    <label class="mb-5 block text-xl">Upload Event Poster</label>
+                                    <div class="mb-8">
+                                        <input type="file" name="file" id="file" accept="image/*" class="sr-only" />
+                                        <label for="file" id="fileLabel" class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center cursor-pointer">
+                                            <div id="uploadContent">
+                                                <span class="mb-2 block text-xl font-semibold text-[#07074D]" id="filePrompt">Drop files here</span>
+                                                <span class="mb-2 block text-base font-medium text-[#6B7280]">Or</span>
+                                                <span class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]">Browse</span>
+                                            </div>
+                                            <div id="fileInfo" class="hidden">
+                                                <span id="fileName" class="block text-base font-medium text-[#07074D]"></span>
+                                                <span class="block text-sm text-green-600">File uploaded successfully</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Submit Button -->
+                <div class="text-right">
+                    <button type="submit" value="Submit Event" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('file');
+            const fileLabel = document.getElementById('fileLabel');
+            const filePrompt = document.getElementById('filePrompt');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const uploadContent = document.getElementById('uploadContent');
+        
+            fileInput.addEventListener('change', function() {
+                const file = fileInput.files[0];
+                if (file) {
+                    filePrompt.style.display = 'none'; // Hide prompt
+                    uploadContent.style.display = 'none'; // Hide the upload container
+                    fileInfo.classList.remove('hidden'); // Show file info
+                    fileName.textContent = file.name; // Set the file name
+                }
+            });
+        });
+        </script>
+        
+        
+</html>

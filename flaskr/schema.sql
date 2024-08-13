@@ -76,3 +76,21 @@ CREATE TABLE IF NOT EXISTS applications (
     -- Additional fields for file upload or other data
     file BLOB
 );
+
+
+
+CREATE TABLE IF NOT EXISTS events (
+    event_id INTEGER PRIMARY KEY AUTOINCREMENT,          -- Auto-incremented primary key
+    event_name VARCHAR(255) NOT NULL,     -- Event name
+    event_date DATE NOT NULL,             -- Event date
+    start_time TIME NOT NULL,             -- Start time
+    end_time TIME NOT NULL,               -- End time
+    event_location VARCHAR(255) NOT NULL,       -- Event location
+    event_description TEXT NOT NULL,            -- Event description
+    event_type VARCHAR(50) NOT NULL,      -- Event type (e.g., Academic, Social)
+    organizer_name VARCHAR(255) NOT NULL, -- Organizer's name
+    organizer_email VARCHAR(255) NOT NULL UNIQUE, -- Organizer's email (unique constraint)
+    organizer_phone VARCHAR(20),          -- Organizer's phone (optional)
+    max_attendees INTEGER,                -- Maximum number of attendees (optional)
+    file BLOB                     -- Event poster (stored as binary data)
+);
