@@ -94,3 +94,19 @@ CREATE TABLE IF NOT EXISTS events (
     max_attendees INTEGER,                -- Maximum number of attendees (optional)
     file BLOB                     -- Event poster (stored as binary data)
 );
+
+
+CREATE TABLE IF NOT EXISTS bursaries (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    bursary_name VARCHAR(255) NOT NULL,
+    end_date DATE NOT NULL,
+    bursary_introduction TEXT NOT NULL,
+    bursary_provider_description TEXT NOT NULL,
+    bursary_description TEXT NOT NULL,
+    bursary_fields TEXT NOT NULL,
+    bursary_cover TEXT NOT NULL,
+    bursary_requirements TEXT NOT NULL,
+    bursary_apply TEXT NOT NULL,
+    provider_information TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

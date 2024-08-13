@@ -425,3 +425,56 @@ def event_form():
             return redirect(url_for('university.events'))
         
     return render_template('university/dashboard/events_form.html')
+
+
+
+
+@bp.route('/bursary')
+def bursary():
+    db = get_db()
+    bursaries = db.execute('SELECT * FROM bursaries').fetchall()
+    return render_template('university/bursary.html', bursaries=bursaries)
+
+
+
+@bp.route('/create/bursary_form', methods=('GET', 'POST'))
+def create_bursary_form():
+    if request.method == 'POST':
+        bursary_name = request.form['bursary_name']
+        end_date = request.form['end_date']
+        bursary_introduction = request.form['bursary_introduction']
+        bursary_provider_description = request.form['bursary_provider_description']
+        bursary_description = request.form['bursary_description']
+        bursary_fields = request.form['bursary_fields']
+        bursary_cover = request.form['bursary_cover']
+        bursary_requirements = request.form['bursary_requirements']
+        bursary_apply = request.form['bursary_apply']
+        provider_information = request.form['provider_information']
+
+        
+        error = None
+        
+        if error is not None:
+            flash(error)
+        else:
+            db = get_db()
+            db.execute(
+                'INSERT INTO bursaries (bursary_name, end_date, bursary_introduction, bursary_provider_description, bursary_description, bursary_fields, bursary_cover, bursary_requirements, bursary_apply, provider_information) '
+                'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                (bursary_name, end_date, bursary_introduction, bursary_provider_description, bursary_description, bursary_fields, bursary_cover, bursary_requirements, bursary_apply, provider_information)
+            )
+            db.commit()
+            return redirect(url_for('university.bursary'))  # Redirect to a list view or another page after successful submission
+        
+    return render_template('university/dashboard/bursary_form.html')  # Make sure to update the path to your template
+
+
+@bp.route('/bursary/<int:bursary_id>')
+def bursary_detail(bursary_id):
+    db = get_db()
+    bursary = db.execute('SELECT * FROM bursaries WHERE id = ?', (bursary_id,)).fetchone()
+    
+    if bursary is None:
+        abort(404)  # Return a 404 error if the bursary is not found
+    
+    return render_template('university/bursary_post.html', bursary=bursary)

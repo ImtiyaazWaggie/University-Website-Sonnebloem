@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
+    <title>Application Form</title>
+</head>
+    <body>
+        <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
+            <form method="post" enctype="multipart/form-data" class="container max-w-screen-lg mx-auto">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="font-semibold text-xl text-gray-600">Application Form</h2>
+                    <a href="/" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">
+                        Home
+                    </a>
+                </div>
+        
+                <!-- Personal Details Section -->
+                <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+                    <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+                        <div class="text-gray-600">
+                            <p class="font-medium text-lg">Bursary Details</p>
+                            <p>Please fill out all the fields.</p>
+                        </div>
+                        <div class="lg:col-span-2">
+                            <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                                <div class="md:col-span-5">
+                                    <label for="bursary_name">Bursary Name</label>
+                                    <input type="text" name="bursary_name" id="bursary_name" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['bursary_name'] }}" />
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="end_date">Application End Date</label>
+                                    <input type="date" name="end_date" id="end_date" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="{{ request.form['end_date'] }}" />
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="bursary_introduction">Bursary Introduction</label>
+                                    <textarea name="bursary_introduction" id="bursary_introduction" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['bursary_introduction'] }}</textarea>
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="bursary_provider_description">Bursary Provider Description</label>
+                                    <textarea name="bursary_provider_description" id="bursary_provider_description" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['bursary_provider_description'] }}</textarea>
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="bursary_description">Bursary Description</label>
+                                    <textarea name="bursary_description" id="bursary_description" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['bursary_description'] }}</textarea>
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="bursary_fields">Bursary Fields</label>
+                                    <textarea name="bursary_fields" id="bursary_fields" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['bursary_fields'] }}</textarea>
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="bursary_cover">Bursary Cover</label>
+                                    <textarea name="bursary_cover" id="bursary_cover" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['bursary_cover'] }}</textarea>
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="bursary_requirements">Bursary Requirements</label>
+                                    <textarea name="bursary_requirements" id="bursary_requirements" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['bursary_requirements'] }}</textarea>
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="bursary_apply">How to Apply</label>
+                                    <textarea name="bursary_apply" id="bursary_apply" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['bursary_apply'] }}</textarea>
+                                </div>
+                                <div class="md:col-span-5">
+                                    <label for="provider_information">Contact Information</label>
+                                    <textarea name="provider_information" id="provider_information" class="h-24 border mt-1 rounded px-4 w-full bg-gray-50">{{ request.form['provider_information'] }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Submit Button -->
+                <div class="text-right">
+                    <button type="submit" value="Submit Bursary" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Submit</button>
+                </div>
+            </form>
+        </div>
+    </body>   
+</html>
