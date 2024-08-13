@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+
+{% block programmes %}
+<section class="container pt-14 px-4 mx-auto">
+    <div class="mt-6 md:flex md:items-center md:justify-between">
+        <div class="inline-flex overflow-hidden bg-white border divide-x rounded-lg dark:bg-gray-900 rtl:flex-row-reverse dark:border-gray-700 dark:divide-gray-700">
+            <a href="{{ url_for('university.programmes') }}">
+                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
+                    All
+                </button>
+            </a>
+            {% for faculty in programme_faculty %}
+            <a href="{{ url_for('university.programmes', programme_faculty=faculty.programme_faculty) }}">
+                <button class="px-5 py-2 text-xs font-medium text-gray-600 transition-colors duration-200 sm:text-sm dark:hover:bg-gray-800 dark:text-gray-300 hover:bg-gray-100">
+                    {{ faculty.programme_faculty }}
+                </button>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="flex flex-col mt-6">
+        <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+                <div class="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-800">
+                            <tr>
+                                <th scope="col" class="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    <button class="flex items-center gap-x-3 focus:outline-none">
+                                        <span>Programme Name</span>
+                                        <svg class="h-3" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <!-- SVG path data -->
+                                        </svg>
+                                    </button>
+                                </th>
+                                <th scope="col" class="px-12 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    Programme Code
+                                </th>
+                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                                    Qualification Type
+                                </th>
+                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Graduate Type</th>
+                                <th scope="col" class="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">Study Type</th>
+                                <th scope="col" class="relative py-3.5 px-4">
+                                    <span class="sr-only">Edit</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                            {% for programme in programmes %}
+                            <tr>
+                                <td class="px-4 py-4 text-sm font-medium whitespace-nowrap">
+                                    <div>
+                                        <h2 class="font-medium text-gray-800 dark:text-white">{{programme.programme_name}}</h2>
+                                    </div>
+                                </td>
+                                <td class="px-12 py-4 text-sm font-medium whitespace-nowrap">
+                                    <div>
+                                        <h2 class="font-medium text-gray-800 dark:text-white">{{programme.programme_code}}</h2>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                    <div>
+                                        <h4 class="text-gray-700 dark:text-gray-200">{{programme.qualification_type}}</h4>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                    {% if programme.graduate_type == 'undergraduate' %}
+                                    <div class="inline px-3 py-1 text-sm font-normal rounded-full text-orange-500 gap-x-2 bg-orange-100/60 dark:bg-gray-800">
+                                        {{programme.graduate_type}}
+                                    </div>
+                                    {% else %}
+                                    <div class="inline px-3 py-1 text-sm font-normal rounded-full text-purple-500 gap-x-2 bg-purple-100/60 dark:bg-gray-800">
+                                        {{programme.graduate_type}}
+                                    </div>
+                                    {% endif %}
+                                </td>
+                                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                    <div>
+                                        <h4 class="text-gray-700 dark:text-gray-200">{{programme.study_type}}</h4>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-4 text-sm whitespace-nowrap">
+                                    <button class="px-1 py-1 text-gray-500 transition-colors duration-200 rounded-lg dark:text-gray-300 hover:bg-gray-100">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                                        </svg>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,58 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
+    <title>News</title>
+</head>
+    <body>
+        <section class="bg-white dark:bg-gray-900">
+            <div class="container px-6 py-10 mx-auto">
+                <div class="flex items-center justify-between">
+                    <!-- Home Button -->
+                    <a href="{{ url_for('university.index') }}" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">
+                        Home
+                    </a>
+        
+                    <!-- Heading -->
+                    <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white flex-1">
+                        News!
+                    </h1>
+                </div>
+        
+                <div class="flex py-4 mt-4 overflow-x-auto overflow-y-hidden md:justify-center dark:border-gray-700">
+                    <!-- Filter buttons -->
+                    {% for tag in tags %}
+                    <a href="{{ url_for('university.news', tags=tag.tags) }}">
+                        <button class="h-12 px-8 py-2 -mb-px text-sm text-center {{ 'text-blue-600 bg-transparent border-b-2 border-blue-500 dark:border-blue-400 dark:text-blue-300' if selected_tag == tag.tags else 'text-gray-700 bg-transparent border-b-2 border-gray-200 dark:text-white dark:border-gray-700 dark:hover:border-gray-400 hover:border-gray-400' }} sm:text-base whitespace-nowrap focus:outline-none">
+                            {{ tag.tags }}
+                        </button>
+                    </a>
+                    {% endfor %}
+                </div>
+        
+                <section class="mt-8 space-y-8 lg:mt-12">
+                    {% for post in news_posts %}
+                    <section class="lg:flex lg:items-center justify-center">
+                        <div class="lg:w-1/3 ">
+                            <a href="{{ url_for('university.news_post_details', post_id=post.id) }}">
+                                <p class="text-lg tracking-wider text-blue-500 uppercase dark:text-blue-400">{{ post.headline }}</p>
+                            </a>
+                            <h2 class="mt-2 text-2xl font-semibold text-gray-800 capitalize dark:text-white"></h2>
+                        </div>
+        
+                        <div class="mt-4 lg:w-1/2 lg:mt-0">
+                            <img class="object-cover w-full h-64 rounded-lg md:h-72"
+                                src="{{ url_for('static', filename='uploads/' + post.file) }}"
+                                alt="">
+                        </div> 
+                    </section>
+                    {% endfor %}
+                </section>
+            </div>
+        </section> 
+    </body>
+</html>
