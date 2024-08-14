@@ -1,3 +1,17 @@
 #inboxDropdownContent {
     z-index: 10;
   }
+
+
+
+
+  .content {
+    margin-left: 16rem; /* 64px = 16rem */
+    padding: 1.5rem;
+  }
+  
+  @media (max-width: 640px) {
+    .content {
+      margin-left: 0;
+    }
+  }
