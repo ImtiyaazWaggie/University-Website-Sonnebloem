@@ -1,21 +1,7 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='dist/css/output.css') }}">
-    <title>Application Form</title>
-</head>
-    <body>
+{% extends 'base_dashboard.html' %}
+{% block eventsform %}
         <div class="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
             <form method="post" enctype="multipart/form-data" class="container max-w-screen-lg mx-auto">
-                <div class="flex items-center justify-between mb-6">
-                    <h2 class="font-semibold text-xl text-gray-600">Application Form</h2>
-                    <a href="/" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">
-                        Home
-                    </a>
-                </div>
         
                 <!-- Personal Details Section -->
                 <div class="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
@@ -123,28 +109,26 @@
                 </div>
             </form>
         </div>
-    </body>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const fileInput = document.getElementById('file');
-            const fileLabel = document.getElementById('fileLabel');
-            const filePrompt = document.getElementById('filePrompt');
-            const fileInfo = document.getElementById('fileInfo');
-            const fileName = document.getElementById('fileName');
-            const uploadContent = document.getElementById('uploadContent');
-        
-            fileInput.addEventListener('change', function() {
-                const file = fileInput.files[0];
-                if (file) {
-                    filePrompt.style.display = 'none'; // Hide prompt
-                    uploadContent.style.display = 'none'; // Hide the upload container
-                    fileInfo.classList.remove('hidden'); // Show file info
-                    fileName.textContent = file.name; // Set the file name
-                }
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const fileInput = document.getElementById('file');
+                const fileLabel = document.getElementById('fileLabel');
+                const filePrompt = document.getElementById('filePrompt');
+                const fileInfo = document.getElementById('fileInfo');
+                const fileName = document.getElementById('fileName');
+                const uploadContent = document.getElementById('uploadContent');
+            
+                fileInput.addEventListener('change', function() {
+                    const file = fileInput.files[0];
+                    if (file) {
+                        filePrompt.style.display = 'none'; // Hide prompt
+                        uploadContent.style.display = 'none'; // Hide the upload container
+                        fileInfo.classList.remove('hidden'); // Show file info
+                        fileName.textContent = file.name; // Set the file name
+                    }
+                });
             });
-        });
-        </script>
+            </script>
         
-        
-</html>
+{% endblock %}
